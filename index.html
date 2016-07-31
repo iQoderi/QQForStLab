@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="QQApp">
+<head>
+    <meta charset="UTF-8">
+    <title>防QQ聊天列表</title>
+    <link rel="stylesheet" href="./style.css"/>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="app.js"></script>
+</head>
+<body ng-controller="QQCtrl">
+<div class="container">
+    <div class="left-mobile">
+        <div class="mobile-content">
+            <div class="my-friend-container">
+                <div class="header">
+                    <div class="add-friend-btn" ng-click="showAdd()">
+                    </div>
+                </div>
+                <div class="friend">
+                    <div class="search-input">
+                        <input type="text"
+                               ng-keyup="searchFriends($event)"
+                               ng-model="search" placeholder="搜索好友"/>
+                    </div>
+                    <ul class="friend-list">
+                        <li ng-repeat="friend in friendList track by $index">
+                            <img src={{friend.avator}} alt="">
+                            <span class="name" ng-bind="friend.name|limitTo:6"></span>
+                            <span class="right-btn">
+                                <a href="javascript:;" ng-click="topFriend($index)"
+                                   class="f-btn">置顶</a>
+                                <a href="javascript:;" ng-click="rmFriend($index)"
+                                   class="d-btn">删除</a>
+                            </span>
+                        </li>
+                        <div class="clear" ng-click="clear()">
+                            清空好友
+                        </div>
+                    </ul>
+                </div>
+            </div>
+            <div class="addfriend-box" ng-show="isAddFirend">
+                <i ng-click="hideAdd()">×</i>
+                <p><input type="text" ng-model="name" placeholder="请输入好友姓名"></p>
+                <div class="bottom-btn">
+                    <a href="javascript:;" ng-click="hideAdd()">取消</a>
+                    <a href="javascript:;" ng-click="addFriend()" class="sure-btn">确定</a>
+                </div>
+            </div>
+            <div class="mask" ng-show="isAddFirend" ng-click="hideAdd()"></div>
+            <span class="tip" ng-show="tip.show" ng-bind="tip.content">我是提示内容</span>
+            <div class="search-result" ng-show="searchResult.length>0">
+                <div class="s-headers">
+                    搜索结果
+                    <i ng-click="searchResult.length=0">×</i>
+                </div>
+                <ul class="friend-list search-list">
+                    <li ng-repeat="friend in friendList track by $index">
+                        <img src={{friend.avator}} alt="">
+                        <span class="name" ng-bind="friend.name|limitTo:6"></span>
+                    </li>
+                    <div class="clear" ng-click="clear()">
+                        清空好友
+                    </div>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="suggestion">
+        点头部+号进行添加好友,鼠标进入搜索好友输入框进行按enter键进行搜索
+    </div>
+</div>
+</body>
+
+</html>
