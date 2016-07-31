@@ -74,7 +74,7 @@ function QQCtrl($scope, $timeout) {
 
     //删除好友
     $scope.rmFriend = function (index) {
-        var flag = window.confirm('您确定要删除好友' + $scope.friendList[index] + "?");
+        var flag = window.confirm('您确定要删除好友' + $scope.friendList[index].name + "?");
         if (flag) {
             $scope.friendList.splice(index, 1);
             $scope.saveFriend($scope.friendList);
